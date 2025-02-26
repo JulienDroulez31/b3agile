@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trombinoscope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+        }
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .role {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>Trombinoscope</h1>
+    <div class="container">
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Photo de Jean">
+            <div class="name">Jean Dupont</div>
+            <div class="role">Développeur</div>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Photo de Marie">
+            <div class="name">Marie Curie</div>
+            <div class="role">Scientifique</div>
+        </div>
+        <div class="card">
+            <img src="https://via.placeholder.com/100" alt="Photo de Paul">
+            <div class="name">Paul Durand</div>
+            <div class="role">Designer</div>
+        </div>
+    </div>
+</body>
+</html>
