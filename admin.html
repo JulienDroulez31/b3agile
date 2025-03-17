@@ -26,12 +26,27 @@
             cursor: pointer;
             margin-top: 20px;
         }
+        .delete-btn {
+            background: darkred;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="admin-container">
         <h1>Bienvenue sur la page Admin</h1>
         <p id="welcome-message"></p>
+        <h2>Supprimer des photos</h2>
+        <div id="photo-list">
+            <button class="delete-btn" onclick="deletePhoto('Romain Der-Nercessian')">Supprimer Romain</button>
+            <button class="delete-btn" onclick="deletePhoto('Alexandre Billy')">Supprimer Alexandre</button>
+            <button class="delete-btn" onclick="deletePhoto('Julien Meriel')">Supprimer Julien M.</button>
+            <button class="delete-btn" onclick="deletePhoto('Julien Droulez')">Supprimer Julien D.</button>
+        </div>
         <button class="logout-btn" onclick="logout()">Se déconnecter</button>
     </div>
 
@@ -41,6 +56,15 @@
             window.location.href = "index.html"; // Redirige si non connecté
         } else {
             document.getElementById("welcome-message").innerText = `Bonjour, ${user} !`;
+        }
+
+        function deletePhoto(name) {
+            let removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
+            if (!removedPhotos.includes(name)) {
+                removedPhotos.push(name);
+                localStorage.setItem("removedPhotos", JSON.stringify(removedPhotos));
+                alert(`${name} supprimé !`);
+            }
         }
 
         function logout() {
