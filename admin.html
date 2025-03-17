@@ -57,7 +57,7 @@
         } else {
             document.getElementById("welcome-message").innerText = `Bonjour, ${user} !`;
         }
-
+    
         function deletePhoto(name) {
             let removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
             if (!removedPhotos.includes(name)) {
@@ -66,11 +66,19 @@
                 alert(`${name} supprimé !`);
             }
         }
-
+    
+        function restorePhotos() {
+            localStorage.removeItem("removedPhotos"); // Supprime la liste des photos supprimées
+            alert("Toutes les photos ont été restaurées !");
+        }
+    
         function logout() {
             sessionStorage.removeItem("user");
             window.location.href = "index.html";
         }
     </script>
+    
+    <button class="restore-btn" onclick="restorePhotos()">Restaurer toutes les photos</button>
+    
 </body>
 </html>
