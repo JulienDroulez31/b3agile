@@ -45,9 +45,39 @@
             right: 10px;
             width: 100px;
         }
+        .login-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .login-container input {
+            display: block;
+            margin-bottom: 5px;
+            padding: 5px;
+            width: 150px;
+        }
+        .login-container button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+    <div class="login-container">
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Identifiant" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+    
     <h1>Trombinoscope</h1>
     <div class="container">
         <div class="card">
@@ -72,5 +102,27 @@
         </div>
     </div>
     <img src="https://sarcdprodstrapi.blob.core.windows.net/strapi-media/assets/logo_epsi_8b6f0271b8.png" alt="Logo EPSI" class="logo">
+    
+    <script>
+        const users = {
+            "romain": "password1",
+            "alexandre": "password2",
+            "julienm": "password3",
+            "juliend": "password4"
+        };
+
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (users[username] && users[username] === password) {
+                alert("Connexion réussie !");
+            } else {
+                alert("Identifiant ou mot de passe incorrect.");
+            }
+        });
+    </script>
 </body>
 </html>
