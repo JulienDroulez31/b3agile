@@ -5,47 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Admin</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding-top: 50px;
-        }
-        .admin-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        .logout-btn {
-            background: red;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .delete-btn {
-            background: darkred;
-            color: white;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
-            margin: 5px;
-        }
+        /* Vos styles existants */
     </style>
 </head>
 <body>
     <div class="admin-container">
         <h1>Bienvenue sur la page Admin</h1>
         <p id="welcome-message"></p>
-        <h2>Supprimer des photos</h2>
+        <h2>Gestion des photos</h2>
         <div id="photo-list">
-            <button class="delete-btn" onclick="deletePhoto('Romain Der-Nercessian')">Supprimer Romain</button>
-            <button class="delete-btn" onclick="deletePhoto('Alexandre Billy')">Supprimer Alexandre</button>
-            <button class="delete-btn" onclick="deletePhoto('Julien Meriel')">Supprimer Julien M.</button>
-            <button class="delete-btn" onclick="deletePhoto('Julien Droulez')">Supprimer Julien D.</button>
+            <button class="delete-btn" onclick="deletePhoto('Romain Der-Nercessian')">Supprimer la photo de Romain</button>
+            <button class="delete-btn" onclick="deletePhoto('Alexandre Billy')">Supprimer la photo d'Alexandre</button>
+            <button class="delete-btn" onclick="deletePhoto('Julien Meriel')">Supprimer la photo de Julien M.</button>
+            <button class="delete-btn" onclick="deletePhoto('Julien Droulez')">Supprimer la photo de Julien D.</button>
+            <button class="add-photo-btn" onclick="addPhoto('Romain Der-Nercessian')">Ajouter une photo pour Romain</button>
+            <button class="add-photo-btn" onclick="addPhoto('Alexandre Billy')">Ajouter une photo pour Alexandre</button>
+            <button class="add-photo-btn" onclick="addPhoto('Julien Meriel')">Ajouter une photo pour Julien M.</button>
+            <button class="add-photo-btn" onclick="addPhoto('Julien Droulez')">Ajouter une photo pour Julien D.</button>
         </div>
         <button class="logout-btn" onclick="logout()">Se déconnecter</button>
     </div>
@@ -66,6 +42,14 @@
                 alert(`${name} supprimé !`);
             }
         }
+
+        function addPhoto(name) {
+            const newPhoto = prompt(`Entrez l'URL de la photo de ${name}:`);
+            if (newPhoto) {
+                localStorage.setItem(name + "-photo", newPhoto); // Sauvegarder dans le localStorage
+                alert(`Photo de ${name} ajoutée !`);
+            }
+        }
     
         function restorePhotos() {
             localStorage.removeItem("removedPhotos"); // Supprime la liste des photos supprimées
@@ -79,6 +63,5 @@
     </script>
     
     <button class="restore-btn" onclick="restorePhotos()">Restaurer toutes les photos</button>
-    
 </body>
 </html>

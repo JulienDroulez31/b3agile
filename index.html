@@ -80,28 +80,15 @@
     
     <h1>Trombinoscope</h1>
     <div class="container">
-        <div class="card">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Romain">
+        <div class="card" id="romain">
+            <img id="photo-romain" src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Romain">
             <div class="name">Romain Der-Nercessian</div>
             <div class="role">Product Owner</div>
+            <button onclick="changePhoto('romain')">Changer la photo</button>
+            <button onclick="removePhoto('romain')">Supprimer la photo</button>
         </div>
-        <div class="card">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo d'Alexandre">
-            <div class="name">Alexandre Billy</div>
-            <div class="role">Scrum Master</div>
-        </div>
-        <div class="card">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
-            <div class="name">Julien Meriel</div>
-            <div class="role">Développeur</div>
-        </div>
-        <div class="card">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
-            <div class="name">Julien Droulez</div>
-            <div class="role">Développeur</div>
-        </div>
+        <!-- Répétez pour les autres utilisateurs -->
     </div>
-    <img src="https://sarcdprodstrapi.blob.core.windows.net/strapi-media/assets/logo_epsi_8b6f0271b8.png" alt="Logo EPSI" class="logo">
     
     <script>
         const users = {
@@ -124,20 +111,33 @@
                 alert("Identifiant ou mot de passe incorrect.");
             }
         });
-    </script>
-<script>
-    function loadPhotos() {
-        const removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
-        document.querySelectorAll(".card").forEach(card => {
-            const name = card.querySelector(".name").textContent.trim();
-            if (removedPhotos.includes(name)) {
-                card.style.display = "none"; // Masquer la carte supprimée
-            }
-        });
-    }
 
-    document.addEventListener("DOMContentLoaded", loadPhotos);
-</script>
+        function changePhoto(user) {
+            const newPhoto = prompt("Entrez l'URL de votre nouvelle photo :");
+            if (newPhoto) {
+                document.getElementById("photo-" + user).src = newPhoto;
+                localStorage.setItem(user + "-photo", newPhoto); // Sauvegarder dans le localStorage
+            }
+        }
+
+        function removePhoto(user) {
+            const defaultPhoto = "https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg";
+            document.getElementById("photo-" + user).src = defaultPhoto;
+            localStorage.removeItem(user + "-photo"); // Supprimer l'image de profil sauvegardée
+        }
+
+        // Charger les photos depuis localStorage
+        function loadPhotos() {
+            const users = ['romain', 'alexandre', 'julienm', 'juliend']; // Liste des utilisateurs
+            users.forEach(user => {
+                const storedPhoto = localStorage.getItem(user + "-photo");
+                if (storedPhoto) {
+                    document.getElementById("photo-" + user).src = storedPhoto;
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", loadPhotos);
+    </script>
 </body>
 </html>
-
