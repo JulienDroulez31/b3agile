@@ -110,19 +110,21 @@
             "julienm": "password3",
             "juliend": "password4"
         };
-
+    
         document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault();
-
+    
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-
+    
             if (users[username] && users[username] === password) {
-                alert("Connexion réussie !");
+                sessionStorage.setItem("user", username); // Stocker l'utilisateur
+                window.location.href = "admin.html"; // Rediriger vers admin
             } else {
                 alert("Identifiant ou mot de passe incorrect.");
             }
         });
     </script>
+    
 </body>
 </html>
