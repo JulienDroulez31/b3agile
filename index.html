@@ -126,17 +126,34 @@
         });
     </script>
 <script>
-    function loadPhotos() {
-        const removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
-        document.querySelectorAll(".card").forEach(card => {
-            const name = card.querySelector(".name").textContent.trim();
-            if (removedPhotos.includes(name)) {
-                card.style.display = "none"; // Masquer la carte supprimée
-            }
-        });
+    const user = sessionStorage.getItem("user");
+    if (!user) {
+        window.location.href = "index.html"; // Redirige si non connecté
+    } else {
+        document.getElementById("welcome-message").innerText = `Bonjour, ${user} !`;
     }
 
-    document.addEventListener("DOMContentLoaded", loadPhotos);
+    function deletePhoto(name) {
+        let removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
+        if (!removedPhotos.includes(name)) {
+            removedPhotos.push(name);
+            localStorage.setItem("removedPhotos", JSON.stringify(removedPhotos));
+            alert(`${name} supprimé !`);
+        }
+    }
+
+    function restorePhotos() {
+        localStorage.removeItem("removedPhotos"); // Supprime la liste des photos supprimées
+        alert("Toutes les photos ont été restaurées !");
+    }
+
+    function logout() {
+        sessionStorage.removeItem("user");
+        window.location.href = "index.html";
+    }
 </script>
+
+<button class="restore-btn" onclick="restorePhotos()">Restaurer toutes les photos</button>
+
 </body>
 </html>
