@@ -125,6 +125,18 @@
             }
         });
     </script>
-    
+<script>
+    function loadPhotos() {
+        const removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
+        document.querySelectorAll(".card").forEach(card => {
+            const name = card.querySelector(".name").textContent.trim();
+            if (removedPhotos.includes(name)) {
+                card.style.display = "none"; // Masquer la carte supprimée
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", loadPhotos);
+</script>
 </body>
 </html>
