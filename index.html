@@ -5,26 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trombinoscope</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;  /* Supprimer la marge par défaut */
+    padding: 0; /* Supprimer le padding par défaut */
+}
+
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 200px;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    max-width: 1200px;  /* Limiter la largeur */
+    margin-left: auto;
+    margin-right: auto;  /* Centrer le conteneur */
+}
+
+.card img {
+    width: 100%;  /* Cela permet à l'image de s'adapter à la taille de la carte */
+    height: auto;  /* Maintient le ratio de l'image */
+    max-width: 150px;  /* Limite la largeur de l'image */
+    max-height: 150px; /* Limite la hauteur de l'image */
+}
+
         .login-container {
             position: absolute;
             top: 10px;
