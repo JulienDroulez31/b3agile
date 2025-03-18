@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trombinoscope</title>
     <style>
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;  /* Supprimer la marge par défaut */
-    padding: 0; /* Supprimer le padding par défaut */
-}
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;  /* Supprimer la marge par défaut */
+            padding: 0; /* Supprimer le padding par défaut */
+        }
 
         .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 20px;
-    max-width: 1200px;  /* Limiter la largeur */
-    margin-left: auto;
-    margin-right: auto;  /* Centrer le conteneur */
-}
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+            max-width: 1200px;  /* Limiter la largeur */
+            margin-left: auto;
+            margin-right: auto;  /* Centrer le conteneur */
+        }
 
-.card img {
-    width: 100%;  /* Cela permet à l'image de s'adapter à la taille de la carte */
-    height: auto;  /* Maintient le ratio de l'image */
-    max-width: 150px;  /* Limite la largeur de l'image */
-    max-height: 150px; /* Limite la hauteur de l'image */
-}
+        .card img {
+            width: 100%;  /* Cela permet à l'image de s'adapter à la taille de la carte */
+            height: auto;  /* Maintient le ratio de l'image */
+            max-width: 150px;  /* Limite la largeur de l'image */
+            max-height: 150px; /* Limite la hauteur de l'image */
+        }
 
         .login-container {
             position: absolute;
@@ -52,6 +52,15 @@ body {
             padding: 5px;
             cursor: pointer;
         }
+
+        .logo {
+            position: fixed;    /* Positionne le logo de manière fixe par rapport à la fenêtre */
+            bottom: 20px;       /* Le logo sera à 20px du bas de la page */
+            right: 20px;        /* Le logo sera à 20px du bord droit de la page */
+            width: 100px;       /* Vous pouvez ajuster la taille à 100px ou une autre valeur */
+            height: auto;       /* Maintient le ratio d'aspect */
+        }
+
     </style>
 </head>
 <body>
@@ -72,23 +81,23 @@ body {
         <button onclick="hideRegisterForm()">Annuler</button>
     </div>
     <h1>Trombinoscope</h1>
-    <div class="container">
-        <div class="card">
+    <div class="container" id="photo-container">
+        <div class="card" id="card-Romain Der-Nercessian">
             <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Romain">
             <div class="name">Romain Der-Nercessian</div>
             <div class="role">Product Owner</div>
         </div>
-        <div class="card">
+        <div class="card" id="card-Alexandre Billy">
             <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo d'Alexandre">
             <div class="name">Alexandre Billy</div>
             <div class="role">Scrum Master</div>
         </div>
-        <div class="card">
+        <div class="card" id="card-Julien Meriel">
             <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
             <div class="name">Julien Meriel</div>
             <div class="role">Développeur</div>
         </div>
-        <div class="card">
+        <div class="card" id="card-Julien Droulez">
             <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
             <div class="name">Julien Droulez</div>
             <div class="role">Développeur</div>
@@ -142,6 +151,16 @@ body {
         function hideRegisterForm() {
             document.getElementById("register-container").style.display = "none";
         }
+
+        // Vérifier les photos supprimées et les cacher
+        const removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
+
+        removedPhotos.forEach(photo => {
+            const photoElement = document.getElementById("card-" + photo);
+            if (photoElement) {
+                photoElement.style.display = "none";  // Masquer la carte si la photo a été supprimée
+            }
+        });
     </script>
 </body>
 </html>
