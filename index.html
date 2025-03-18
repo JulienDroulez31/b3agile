@@ -15,58 +15,42 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
+            gap: 10px;
         }
         .card {
             background: white;
-            padding: 20px;
+            padding: 15px;
             margin: 10px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 200px;
-        }
-        .login-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-        }
-        .login-container input {
-            display: block;
-            margin-bottom: 5px;
-            padding: 5px;
             width: 150px;
         }
-        .login-container button {
-            background: #007BFF;
-            color: white;
-            border: none;
-            padding: 5px;
-            cursor: pointer;
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        .role {
+            color: gray;
+            font-size: 12px;
+        }
+        .logo {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 80px;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <form id="login-form">
-            <input type="text" id="username" placeholder="Identifiant" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
-        <button onclick="showRegisterForm()">S'inscrire</button>
-    </div>
-    <div id="register-container" class="login-container" style="display: none;">
-        <form id="register-form">
-            <input type="text" id="new-username" placeholder="Nouvel identifiant" required>
-            <input type="password" id="new-password" placeholder="Nouveau mot de passe" required>
-            <button type="submit">S'inscrire</button>
-        </form>
-        <button onclick="hideRegisterForm()">Annuler</button>
-    </div>
-    
     <h1>Trombinoscope</h1>
     <div class="container">
         <div class="card">
