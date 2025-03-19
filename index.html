@@ -7,10 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             background-color: #f4f4f4;
-            margin: 0;  /* Supprimer la marge par défaut */
-            padding: 0; /* Supprimer le padding par défaut */
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
 
         .container {
@@ -18,53 +18,71 @@
             flex-wrap: wrap;
             justify-content: center;
             margin-top: 20px;
-            max-width: 1200px;  /* Limiter la largeur */
-            margin-left: auto;
-            margin-right: auto;  /* Centrer le conteneur */
+        }
+
+        .card {
+            margin: 15px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            text-align: center;
         }
 
         .card img {
-            width: 100%;  /* Cela permet à l'image de s'adapter à la taille de la carte */
-            height: auto;  /* Maintient le ratio de l'image */
-            max-width: 150px;  /* Limite la largeur de l'image */
-            max-height: 150px; /* Limite la hauteur de l'image */
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
         }
 
-        .login-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
+        .login-container, .register-container {
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container input, .register-container input {
+            width: 100%;
             padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
-        .login-container input {
-            display: block;
-            margin-bottom: 5px;
-            padding: 5px;
-            width: 150px;
-        }
-        .login-container button {
+
+        .login-container button, .register-container button {
+            width: 100%;
+            padding: 10px;
             background: #007BFF;
             color: white;
             border: none;
-            padding: 5px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .logo {
-            position: fixed;    /* Positionne le logo de manière fixe par rapport à la fenêtre */
-            bottom: 20px;       /* Le logo sera à 20px du bas de la page */
-            right: 20px;        /* Le logo sera à 20px du bord droit de la page */
-            width: 100px;       /* Vous pouvez ajuster la taille à 100px ou une autre valeur */
-            height: auto;       /* Maintient le ratio d'aspect */
+        .login-container button:hover, .register-container button:hover {
+            background: #0056b3;
         }
 
+        .name {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .role {
+            color: #777;
+        }
     </style>
 </head>
 <body>
+    <h1>Trombinoscope</h1>
+
+    <!-- Formulaire de Connexion -->
     <div class="login-container">
+        <h2>Se connecter</h2>
         <form id="login-form">
             <input type="text" id="username" placeholder="Identifiant" required>
             <input type="password" id="password" placeholder="Mot de passe" required>
@@ -72,95 +90,95 @@
         </form>
         <button onclick="showRegisterForm()">S'inscrire</button>
     </div>
-    <div id="register-container" class="login-container" style="display: none;">
+
+    <!-- Formulaire d'Inscription -->
+    <div class="register-container" id="register-container" style="display: none;">
+        <h2>S'inscrire</h2>
         <form id="register-form">
-            <input type="text" id="new-username" placeholder="Nouvel identifiant" required>
-            <input type="password" id="new-password" placeholder="Nouveau mot de passe" required>
+            <input type="text" id="new-username" placeholder="Identifiant" required>
+            <input type="password" id="new-password" placeholder="Mot de passe" required>
             <button type="submit">S'inscrire</button>
         </form>
         <button onclick="hideRegisterForm()">Annuler</button>
     </div>
-    <h1>Trombinoscope</h1>
+
+    <!-- Trombinoscope -->
     <div class="container" id="photo-container">
-        <div class="card" id="card-Romain Der-Nercessian">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Romain">
-            <div class="name">Romain Der-Nercessian</div>
-            <div class="role">Product Owner</div>
-        </div>
-        <div class="card" id="card-Alexandre Billy">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo d'Alexandre">
-            <div class="name">Alexandre Billy</div>
-            <div class="role">Scrum Master</div>
-        </div>
-        <div class="card" id="card-Julien Meriel">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
-            <div class="name">Julien Meriel</div>
-            <div class="role">Développeur</div>
-        </div>
-        <div class="card" id="card-Julien Droulez">
-            <img src="https://static.vecteezy.com/ti/vecteur-libre/p1/2318271-icone-de-profil-utilisateur-vectoriel.jpg" alt="Photo de Julien">
-            <div class="name">Julien Droulez</div>
-            <div class="role">Développeur</div>
-        </div>
+        <!-- Les cartes de personnes seront ajoutées dynamiquement ici -->
     </div>
-    <img src="https://sarcdprodstrapi.blob.core.windows.net/strapi-media/assets/logo_epsi_8b6f0271b8.png" alt="Logo EPSI" class="logo">
+
     <script>
-        const admins = {
-            "romain": "password1",
-            "alexandre": "password2",
-            "julienm": "password3",
-            "juliend": "password4"
-        };
-        
-        let users = JSON.parse(localStorage.getItem("users")) || {};
-        
+        // Afficher / Cacher le formulaire d'inscription
+        function showRegisterForm() {
+            document.getElementById('register-container').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+        }
+        function hideRegisterForm() {
+            document.getElementById('register-container').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        // Soumettre le formulaire de connexion
         document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-            
-            if (admins[username] && admins[username] === password) {
-                sessionStorage.setItem("user", username);
-                window.location.href = "admin.html";
-            } else if (users[username] && users[username] === password) {
-                sessionStorage.setItem("user", username);
-                window.location.href = "welcome.html";
-            } else {
-                alert("Identifiant ou mot de passe incorrect.");
-            }
+
+            fetch('login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'trombinoscope.php'; // Page après la connexion
+                } else {
+                    alert("Identifiant ou mot de passe incorrect.");
+                }
+            });
         });
-        
+
+        // Soumettre le formulaire d'inscription
         document.getElementById("register-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const newUsername = document.getElementById("new-username").value;
             const newPassword = document.getElementById("new-password").value;
-            
-            if (!users[newUsername] && !admins[newUsername]) {
-                users[newUsername] = newPassword;
-                localStorage.setItem("users", JSON.stringify(users));
-                alert("Inscription réussie ! Connectez-vous maintenant.");
-                hideRegisterForm();
-            } else {
-                alert("Cet identifiant est déjà pris.");
-            }
-        });
-        
-        function showRegisterForm() {
-            document.getElementById("register-container").style.display = "block";
-        }
-        function hideRegisterForm() {
-            document.getElementById("register-container").style.display = "none";
-        }
 
-        // Vérifier les photos supprimées et les cacher
-        const removedPhotos = JSON.parse(localStorage.getItem("removedPhotos")) || [];
-
-        removedPhotos.forEach(photo => {
-            const photoElement = document.getElementById("card-" + photo);
-            if (photoElement) {
-                photoElement.style.display = "none";  // Masquer la carte si la photo a été supprimée
-            }
+            fetch('register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: newUsername, password: newPassword })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+                    hideRegisterForm();
+                } else {
+                    alert("L'identifiant est déjà pris.");
+                }
+            });
         });
+
+        // Charger les personnes du trombinoscope
+        window.onload = function() {
+            fetch('get_people.php')
+            .then(response => response.json())
+            .then(people => {
+                const container = document.getElementById("photo-container");
+                people.forEach(person => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.innerHTML = `
+                        <img src="${person.photo}" alt="${person.name}">
+                        <div class="name">${person.name}</div>
+                        <div class="role">${person.role}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            });
+        };
     </script>
 </body>
 </html>
