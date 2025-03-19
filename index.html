@@ -3,92 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trombinoscope</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .card {
-            margin: 15px;
-            padding: 20px;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 200px;
-            text-align: center;
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-        }
-
-        .login-container, .register-container {
-            margin: 30px auto;
-            padding: 20px;
-            background: #fff;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-container input, .register-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .login-container button, .register-container button {
-            width: 100%;
-            padding: 10px;
-            background: #007BFF;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .login-container button:hover, .register-container button:hover {
-            background: #0056b3;
-        }
-
-        .name {
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .role {
-            color: #777;
-        }
-    </style>
+    <title>Trombinoscope - Connexion</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Trombinoscope</h1>
+    <div class="header">
+        <h1>Trombinoscope</h1>
+    </div>
 
     <!-- Formulaire de Connexion -->
-    <div class="login-container">
+    <div class="login-container" id="login-container">
         <h2>Se connecter</h2>
         <form id="login-form">
             <input type="text" id="username" placeholder="Identifiant" required>
             <input type="password" id="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
         </form>
-        <button onclick="showRegisterForm()">S'inscrire</button>
+        <p>Pas encore de compte ? <a href="#" onclick="toggleForms()">S'inscrire</a></p>
     </div>
 
     <!-- Formulaire d'Inscription -->
@@ -99,26 +30,23 @@
             <input type="password" id="new-password" placeholder="Mot de passe" required>
             <button type="submit">S'inscrire</button>
         </form>
-        <button onclick="hideRegisterForm()">Annuler</button>
-    </div>
-
-    <!-- Trombinoscope -->
-    <div class="container" id="photo-container">
-        <!-- Les cartes de personnes seront ajoutées dynamiquement ici -->
+        <p>Déjà un compte ? <a href="#" onclick="toggleForms()">Se connecter</a></p>
     </div>
 
     <script>
-        // Afficher / Cacher le formulaire d'inscription
-        function showRegisterForm() {
-            document.getElementById('register-container').style.display = 'block';
-            document.getElementById('login-form').style.display = 'none';
-        }
-        function hideRegisterForm() {
-            document.getElementById('register-container').style.display = 'none';
-            document.getElementById('login-form').style.display = 'block';
+        function toggleForms() {
+            const loginContainer = document.getElementById('login-container');
+            const registerContainer = document.getElementById('register-container');
+            
+            if (loginContainer.style.display === 'none') {
+                loginContainer.style.display = 'block';
+                registerContainer.style.display = 'none';
+            } else {
+                loginContainer.style.display = 'none';
+                registerContainer.style.display = 'block';
+            }
         }
 
-        // Soumettre le formulaire de connexion
         document.getElementById("login-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const username = document.getElementById("username").value;
@@ -132,14 +60,13 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = 'trombinoscope.php'; // Page après la connexion
+                    window.location.href = 'trombinoscope.php';
                 } else {
                     alert("Identifiant ou mot de passe incorrect.");
                 }
             });
         });
 
-        // Soumettre le formulaire d'inscription
         document.getElementById("register-form").addEventListener("submit", function(event) {
             event.preventDefault();
             const newUsername = document.getElementById("new-username").value;
@@ -154,31 +81,12 @@
             .then(data => {
                 if (data.success) {
                     alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
-                    hideRegisterForm();
+                    toggleForms();
                 } else {
                     alert("L'identifiant est déjà pris.");
                 }
             });
         });
-
-        // Charger les personnes du trombinoscope
-        window.onload = function() {
-            fetch('get_people.php')
-            .then(response => response.json())
-            .then(people => {
-                const container = document.getElementById("photo-container");
-                people.forEach(person => {
-                    const card = document.createElement("div");
-                    card.classList.add("card");
-                    card.innerHTML = `
-                        <img src="${person.photo}" alt="${person.name}">
-                        <div class="name">${person.name}</div>
-                        <div class="role">${person.role}</div>
-                    `;
-                    container.appendChild(card);
-                });
-            });
-        };
     </script>
 </body>
 </html>

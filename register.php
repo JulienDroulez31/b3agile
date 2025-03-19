@@ -1,25 +1,29 @@
 <?php
-header('Content-Type: application/json');
-require 'db.php';
+require_once 'config.php';
 
-$data = json_decode(file_get_contents("php://input"), true);
-$username = $data['username'];
-$password = $data['password'];
+// Récupérer les données envoyées
+$data = json_decode(file_get_contents('php://input'), true);
+$username = $data['username'] ?? '';
+$password = $data['password'] ?? '';
 
 // Vérifier si l'utilisateur existe déjà
-$stmt = $conn->prepare("SELECT * FROM users WHERE username = :username");
-$stmt->bindParam(':username', $username);
-$stmt->execute();
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$stmt = $db->prepare('SELECT id FROM users WHERE username = ?');
+$stmt->execute([$username]);
+$existingUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if ($user) {
-    echo json_encode(['success' => false]);
-} else {
-    // Ajouter le nouvel utilisateur
-    $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->execute();
-    echo json_encode(['success' => true]);
+$response = ['success' => false];
+
+if (!$existingUser) {
+    // Hasher le mot de passe
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Insérer le nouvel utilisateur
+    $stmt = $db->prepare('INSERT INTO users (username, password) VALUES (?, ?)');
+    $stmt->execute([$username, $hashedPassword]);
+    
+    $response['success'] = true;
 }
+
+header('Content-Type: application/json');
+echo json_encode($response);
 ?>
